@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home_button"
+        android:title="Home"
+        android:icon="@drawable/ic_baseline_home_24"/>
+<!--    <item-->
+<!--        android:id="@+id/batchmates_attendance_button"-->
+<!--        android:title="Batchmates' attendance"-->
+<!--        android:icon="@drawable/ic_baseline_group_24"/>-->
+    <item
+        android:id="@+id/council_button"
+        android:title="Council"
+        android:icon="@drawable/ic_baseline_council_24"/>
+<!--    <item-->
+<!--        android:id="@+id/script_button"-->
+<!--        android:title="Scripts"-->
+<!--        android:icon="@drawable/ic_baseline_script_24"/>-->
+</menu>

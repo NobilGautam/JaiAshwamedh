@@ -1,4 +1,4 @@
-package com.example.ashwamedh;
+package com.example.ashwamedh.util;
 
 import android.app.Application;
 

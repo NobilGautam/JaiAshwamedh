@@ -3,11 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/nobil/AndroidStudioProjects/Ashwamedh/app/src/main/res/drawable/circle_progress_bar.xml" value="0.2525" />
+        <entry key="..\:/Users/nobil/AndroidStudioProjects/Ashwamedh/app/src/main/res/drawable/circle_shape.xml" value="0.2015" />
         <entry key="..\:/Users/nobil/AndroidStudioProjects/Ashwamedh/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.279" />
         <entry key="..\:/Users/nobil/AndroidStudioProjects/Ashwamedh/app/src/main/res/drawable/selector.xml" value="0.2525" />
+        <entry key="..\:/Users/nobil/AndroidStudioProjects/Ashwamedh/app/src/main/res/layout/activity_batchmate_attendance.xml" value="0.2439814814814815" />
         <entry key="..\:/Users/nobil/AndroidStudioProjects/Ashwamedh/app/src/main/res/layout/activity_council.xml" value="0.27447916666666666" />
-        <entry key="..\:/Users/nobil/AndroidStudioProjects/Ashwamedh/app/src/main/res/layout/activity_dashboard.xml" value="0.264" />
+        <entry key="..\:/Users/nobil/AndroidStudioProjects/Ashwamedh/app/src/main/res/layout/activity_dashboard.xml" value="0.2439814814814815" />
         <entry key="..\:/Users/nobil/AndroidStudioProjects/Ashwamedh/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/nobil/AndroidStudioProjects/Ashwamedh/app/src/main/res/layout/attendance_row.xml" value="0.2439814814814815" />
         <entry key="..\:/Users/nobil/AndroidStudioProjects/Ashwamedh/app/src/main/res/layout/fragment_dashboard.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/nobil/AndroidStudioProjects/Ashwamedh/app/src/main/res/menu/bottom_nav_menu.xml" value="0.2734375" />
       </map>

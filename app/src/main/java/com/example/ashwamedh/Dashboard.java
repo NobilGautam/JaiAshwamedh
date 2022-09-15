@@ -3,8 +3,10 @@ package com.example.ashwamedh;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -12,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,8 +27,10 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ashwamedh.model.Confirmation;
 import com.example.ashwamedh.util.UserApi;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -55,6 +60,7 @@ public class Dashboard extends AppCompatActivity {
     private FloatingActionButton absentButton;
     private EditText remarkEditText;
     private Button updateConfirmationButton;
+    private ImageButton signOut;
 
     private String practiceDay;
     private String practiceDate;
@@ -62,12 +68,10 @@ public class Dashboard extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference collectionReference = db.collection("Confirmations");
 
+
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
     private static FirebaseUser currentUser;
-
-    private int[] daysPresent = {0};
-    private int[] totalDays = {0};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +79,8 @@ public class Dashboard extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
 
         Objects.requireNonNull(getSupportActionBar()).hide();
+
+
 
         firebaseAuth = FirebaseAuth.getInstance();
         authStateListener = new FirebaseAuth.AuthStateListener() {
@@ -92,6 +98,17 @@ public class Dashboard extends AppCompatActivity {
         updateConfirmationButton = findViewById(R.id.update_confirmation_button);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.home_button);
+        signOut = findViewById(R.id.signOut_dashboard);
+        signOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firebaseAuth.signOut();
+                Intent intent = new Intent(Dashboard.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         Calendar calendar = Calendar.getInstance();
         Date today = calendar.getTime();
@@ -119,14 +136,16 @@ public class Dashboard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 confirmation[0] = "present";
-                presentButton.setBackgroundColor(getResources().getColor(R.color.selected_button_color));
+                presentButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(Dashboard.this, R.color.selected_button_color)));
+                absentButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(Dashboard.this, R.color.teal_200)));
             }
         });
         absentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 confirmation[0] = "absent";
-                absentButton.setBackgroundColor(getResources().getColor(R.color.selected_button_color));
+                absentButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(Dashboard.this, R.color.selected_button_color)));
+                presentButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(Dashboard.this, R.color.teal_200)));
             }
         });
         
@@ -148,14 +167,15 @@ public class Dashboard extends AppCompatActivity {
                     currentConfirmation.setUserId(userId);
                     currentConfirmation.setPracticeDate(practiceDate);
                     currentConfirmation.setRemarkOrReason(remarkEditText.getText().toString().trim());
-                    collectionReference.add(currentConfirmation)
-                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    collectionReference.document(userId+"_confirmation")
+                            .set(currentConfirmation)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
-                                public void onSuccess(DocumentReference documentReference) {
+                                public void onSuccess(Void unused) {
                                     Toast.makeText(Dashboard.this, "Thankyou for confirming your presence", Toast.LENGTH_SHORT)
                                             .show();
                                     confirmation[0] = "";
-                                    absentButton.setBackgroundColor(getResources().getColor(R.color.teal_200));
+                                    absentButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(Dashboard.this, R.color.teal_200)));
                                     remarkEditText.setText("");
                                 }
                             })
@@ -165,7 +185,7 @@ public class Dashboard extends AppCompatActivity {
                                     Toast.makeText(Dashboard.this, "Couldn't update attendance", Toast.LENGTH_SHORT)
                                             .show();
                                     confirmation[0] = "";
-                                    absentButton.setBackgroundColor(getResources().getColor(R.color.teal_200));
+                                    absentButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(Dashboard.this, R.color.teal_200)));
                                     remarkEditText.setText("");
                                 }
                             });
@@ -177,14 +197,15 @@ public class Dashboard extends AppCompatActivity {
                     currentConfirmation.setUserId(userId);
                     currentConfirmation.setPracticeDate(practiceDate);
                     currentConfirmation.setRemarkOrReason(remarkEditText.getText().toString().trim());
-                    collectionReference.add(currentConfirmation)
-                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    collectionReference.document(userId+"_confirmation")
+                            .set(currentConfirmation)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
-                                public void onSuccess(DocumentReference documentReference) {
+                                public void onSuccess(Void unused) {
                                     Toast.makeText(Dashboard.this, "Thankyou for confirming your presence", Toast.LENGTH_SHORT)
                                             .show();
                                     confirmation[0] = "";
-                                    absentButton.setBackgroundColor(getResources().getColor(R.color.teal_200));
+                                    presentButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(Dashboard.this, R.color.teal_200)));
                                     remarkEditText.setText("");
                                 }
                             })
@@ -194,7 +215,7 @@ public class Dashboard extends AppCompatActivity {
                                     Toast.makeText(Dashboard.this, "Couldn't update attendance", Toast.LENGTH_SHORT)
                                             .show();
                                     confirmation[0] = "";
-                                    absentButton.setBackgroundColor(getResources().getColor(R.color.teal_200));
+                                    presentButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(Dashboard.this, R.color.teal_200)));
                                     remarkEditText.setText("");
                                 }
                             });
@@ -217,6 +238,13 @@ public class Dashboard extends AppCompatActivity {
                     finish();
                     return true;
                 }
+                if (item.getItemId() == R.id.attendance_button) {
+                    Intent intent = new Intent(Dashboard.this, BatchmateAttendance.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                }
                 return false;
             }
         });
@@ -228,25 +256,19 @@ public class Dashboard extends AppCompatActivity {
         int[] daysPresent = {0};
         int[] totalDays = {0};
         //Counting no. of days present
-        Log.d("updateAttendance", "updateAttendance: update initialized" + daysPresent[0] + " " + totalDays[0]);
         collectionReference.whereEqualTo("userId", currentUser.getUid())
                         .addSnapshotListener(new EventListener<QuerySnapshot>() {
                             @Override
                             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                                 assert value != null;
                                 if (!value.isEmpty()) {
-                                    Log.d("updateAttendance", "mil gya data");
                                     for (QueryDocumentSnapshot snapshot : value) {
                                         if (Objects.equals(snapshot.getString("confirmation"), "present")) {
                                             daysPresent[0]++;
-                                            Log.d("updateAttendance", "days present ++ to " + daysPresent[0]);
                                         }
                                         totalDays[0]++;
-                                        Log.d("updateAttendance", "days updated" + daysPresent[0] + " " + totalDays[0]);
                                     }
 
-                                    //displaying current attendance
-                                    Log.d("updateAttendance", "kar diya update");
                                     currentAttendanceTextView.setText("Your current attendance: " + daysPresent[0] + "/" + totalDays[0]);
                                 }
                             }

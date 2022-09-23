@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                                         UserApi userApi = UserApi.getInstance();
                                         userApi.setUserId(currentUserId);
                                         userApi.setUsername(snapshot.getString("username"));
-
+                                        userApi.setUserEmailId(currentUser.getEmail());
                                         Intent intent = new Intent(MainActivity.this, Dashboard.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                                             UserApi userApi = UserApi.getInstance();
                                             userApi.setUsername(snapshot.getString("username"));
                                             userApi.setUserId(currentUserId);
-
+                                            userApi.setUserEmailId(email);
                                             Log.d("signIn", "onEvent: Intent launched");
                                             Intent intent = new Intent(MainActivity.this, Dashboard.class);
                                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

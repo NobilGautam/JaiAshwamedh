@@ -69,6 +69,13 @@ public class CouncilActivity extends AppCompatActivity {
                     finish();
                     return true;
                 }
+                if (item.getItemId() == R.id.manage_practice_confirmation_button) {
+                    Intent intent = new Intent(CouncilActivity.this, ManagePracticeConfirmationActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                }
                 return false;
             }
         });

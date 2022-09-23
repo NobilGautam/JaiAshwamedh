@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.example.ashwamedh.adapter.AllAttendanceRecyclerViewAdapter;
+import com.example.ashwamedh.adapter.OnAttendanceClickListener;
 import com.example.ashwamedh.model.Attendance;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -34,7 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class BatchmateAttendance extends AppCompatActivity {
+public class BatchmateAttendance extends AppCompatActivity implements OnAttendanceClickListener {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference confirmationCollection = db.collection("Confirmations");
     private CollectionReference attendanceCollectionReference = db.collection("Attendance");
@@ -97,7 +98,11 @@ public class BatchmateAttendance extends AppCompatActivity {
                                                     Attendance attendance = new Attendance();
                                                     attendance.setUserId(userId);
                                                     attendance.setDaysPresent(daysPresent[0]);
-                                                    attendance.setTotalDays(totalDays[0]);
+                                                    if(totalDays[0] == 0) {
+                                                        attendance.setTotalDays(1);
+                                                    } else {
+                                                        attendance.setTotalDays(totalDays[0]);
+                                                    }
                                                     attendance.setUsername(name);
                                                     assert userId != null;
                                                     attendanceCollectionReference.document(userId+"_attendance").set(attendance);
@@ -164,6 +169,13 @@ public class BatchmateAttendance extends AppCompatActivity {
                 if (item.getItemId() == R.id.attendance_button) {
                     return true;
                 }
+                if (item.getItemId() == R.id.manage_practice_confirmation_button) {
+                    Intent intent = new Intent(BatchmateAttendance.this, ManagePracticeConfirmationActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                }
                 return false;
             }
         });
@@ -187,11 +199,20 @@ public class BatchmateAttendance extends AppCompatActivity {
                         }
 
 
-                        recyclerViewAdapter = new AllAttendanceRecyclerViewAdapter(attendanceList, BatchmateAttendance.this);
+                        recyclerViewAdapter = new AllAttendanceRecyclerViewAdapter(attendanceList, BatchmateAttendance.this, BatchmateAttendance.this);
                         recyclerView.setAdapter(recyclerViewAdapter);
                         recyclerViewAdapter.notifyDataSetChanged();
                     }
                 });
 
+    }
+
+    @Override
+    public void OnAttendanceClick(String userId, String username) {
+        Intent intent = new Intent(BatchmateAttendance.this, IndividualAttendanceActivity.class);
+        intent.putExtra("userId", userId);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 }

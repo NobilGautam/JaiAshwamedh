@@ -2,28 +2,30 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/individual_attendance_row"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="8dp"
-    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="80dp"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
+    android:layout_marginTop="10dp"
     app:cardElevation="16dp">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#676666"
+        android:background="#939393"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/attendance_row_name"
-            android:layout_width="wrap_content"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/oswald"
-            android:text="Nobil Gautam"
-            android:textColor="@color/black"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="50dp"
+            android:fontFamily="@font/oswald"
+            android:text="Shatakshi Chaturvedi"
+            android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="bold" />
 
@@ -31,49 +33,27 @@
             android:id="@+id/attendance_row_percentage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="88%"
-            android:textSize="20dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"
-            android:layout_marginStart="30dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:text="88%"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
 
         <ProgressBar
             android:id="@+id/progressBar_attendance"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/circle_shape"
             android:indeterminate="false"
             android:padding="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginEnd="20dp"
-            android:layout_gravity="center"
             android:progressDrawable="@drawable/circle_progress_bar" />
-
-        <!--        <TextView-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_gravity="center"-->
-        <!--            android:layout_margin="30dp"-->
-        <!--            android:fontFamily="@font/oswald"-->
-        <!--            android:text="Nobil Gautam"-->
-        <!--            android:textColor="@color/black"-->
-        <!--            android:textSize="20dp"-->
-        <!--            android:textStyle="bold" />-->
-
-        <!--        <ProgressBar-->
-        <!--            style="?android:attr/progressBarStyleHorizontal"-->
-        <!--            android:layout_width="60dp"-->
-        <!--            android:layout_height="60dp"-->
-        <!--            android:layout_marginEnd="1dp"-->
-        <!--            android:layout_gravity="center"-->
-        <!--            android:layout_marginStart="150dp"-->
-        <!--            android:background="@drawable/circle_shape"-->
-        <!--            android:indeterminate="false"-->
-        <!--            android:progressDrawable="@drawable/circle_progress_bar" />-->
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.cardview.widget.CardView>

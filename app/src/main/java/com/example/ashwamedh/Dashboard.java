@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +43,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -61,12 +63,16 @@ public class Dashboard extends AppCompatActivity {
     private EditText remarkEditText;
     private Button updateConfirmationButton;
     private ImageButton signOut;
+    private TextView intimationTextView;
+    private TextView greetingNameTextView;
+    private ImageView profilePicture;
 
     private String practiceDay;
     private String practiceDate;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference collectionReference = db.collection("Confirmations");
+    private CollectionReference profileCollectionReference = db.collection("Profile Pictures");
 
 
     private FirebaseAuth firebaseAuth;
@@ -79,7 +85,6 @@ public class Dashboard extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
 
         Objects.requireNonNull(getSupportActionBar()).hide();
-
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -99,6 +104,44 @@ public class Dashboard extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.home_button);
         signOut = findViewById(R.id.signOut_dashboard);
+        greetingNameTextView = findViewById(R.id.greeting_name_textview);
+        intimationTextView = findViewById(R.id.practice_intimation_textview);
+        profilePicture = findViewById(R.id.userImageView);
+
+        profilePicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Dashboard.this, EditProfileActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        final String[] imageUrl = {""};
+        profileCollectionReference.whereEqualTo("userId", UserApi.getInstance().getUserId())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        if (!queryDocumentSnapshots.isEmpty()){
+                            for (QueryDocumentSnapshot snapshot: queryDocumentSnapshots) {
+                                imageUrl[0] = snapshot.getString("imagePath");
+                                if (!Objects.equals(imageUrl[0], "")) {
+                                    Picasso.get().load(imageUrl[0]).into(profilePicture);
+                                }
+                            }
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+
+
         signOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,6 +152,12 @@ public class Dashboard extends AppCompatActivity {
                 finish();
             }
         });
+
+        absentButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(Dashboard.this, R.color.absent_button_color)));
+        presentButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(Dashboard.this, R.color.present_button_color)));
+
+        UserApi userApi = UserApi.getInstance();
+        greetingNameTextView.setText(userApi.getUsername());
 
         Calendar calendar = Calendar.getInstance();
         Date today = calendar.getTime();
@@ -124,9 +173,21 @@ public class Dashboard extends AppCompatActivity {
             case Calendar.WEDNESDAY: practiceDay = "WEDNESDAY"; break;
             case Calendar.THURSDAY: practiceDay = "THURSDAY"; break;
             case Calendar.FRIDAY: practiceDay = "FRIDAY"; break;
-            case Calendar.SATURDAY: practiceDay = "SATURDAY"; break;
-            case Calendar.SUNDAY: practiceDay = "SUNDAY"; break;
+            case Calendar.SATURDAY: practiceDay = "SATURDAY";
+            calendar.add(Calendar.DAY_OF_YEAR, 2);
+            tomorrow = calendar.getTime();
+            practiceDate = simpleDateFormat.format(tomorrow);
+            practiceDay = "MONDAY";
+            break;
+            case Calendar.SUNDAY: practiceDay = "SUNDAY";
+                calendar.add(Calendar.DAY_OF_YEAR, 1);
+                tomorrow = calendar.getTime();
+                practiceDate = simpleDateFormat.format(tomorrow);
+                practiceDay = "MONDAY";
+            break;
         }
+
+        intimationTextView.setText("Add your confirmation for the next practice at " + practiceDate + ", " + practiceDay);
 
         updateAttendance(collectionReference);
 
@@ -137,7 +198,7 @@ public class Dashboard extends AppCompatActivity {
             public void onClick(View view) {
                 confirmation[0] = "present";
                 presentButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(Dashboard.this, R.color.selected_button_color)));
-                absentButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(Dashboard.this, R.color.teal_200)));
+                absentButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(Dashboard.this, R.color.absent_button_color)));
             }
         });
         absentButton.setOnClickListener(new View.OnClickListener() {
@@ -145,11 +206,12 @@ public class Dashboard extends AppCompatActivity {
             public void onClick(View view) {
                 confirmation[0] = "absent";
                 absentButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(Dashboard.this, R.color.selected_button_color)));
-                presentButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(Dashboard.this, R.color.teal_200)));
+                presentButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(Dashboard.this, R.color.present_button_color)));
             }
         });
         
         //submitting confirmation
+        Date finalTomorrow = tomorrow;
         updateConfirmationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -162,12 +224,19 @@ public class Dashboard extends AppCompatActivity {
                 } else if(confirmation[0] == "absent" && !TextUtils.isEmpty(remarkEditText.getText().toString())) {
                     UserApi userApi = UserApi.getInstance();
                     String userId = userApi.getUserId();
+                    String username = userApi.getUsername();
+                    Log.d("DashboardConf", "onClick: " + username);
                     Confirmation currentConfirmation = new Confirmation();
+                    currentConfirmation.setUsername(username);
                     currentConfirmation.setConfirmation("absent");
                     currentConfirmation.setUserId(userId);
                     currentConfirmation.setPracticeDate(practiceDate);
                     currentConfirmation.setRemarkOrReason(remarkEditText.getText().toString().trim());
-                    collectionReference.document(userId+"_confirmation")
+                    SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("dd_MM_yyyy");
+                    String date = simpleDateFormat1.format(finalTomorrow);
+                    String docAddress = userId+"_"+date;
+                    Log.d("docAddress", "onClick: " + docAddress);
+                    collectionReference.document(docAddress)
                             .set(currentConfirmation)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
@@ -175,7 +244,7 @@ public class Dashboard extends AppCompatActivity {
                                     Toast.makeText(Dashboard.this, "Thankyou for confirming your presence", Toast.LENGTH_SHORT)
                                             .show();
                                     confirmation[0] = "";
-                                    absentButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(Dashboard.this, R.color.teal_200)));
+                                    absentButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(Dashboard.this, R.color.absent_button_color)));
                                     remarkEditText.setText("");
                                 }
                             })
@@ -185,19 +254,25 @@ public class Dashboard extends AppCompatActivity {
                                     Toast.makeText(Dashboard.this, "Couldn't update attendance", Toast.LENGTH_SHORT)
                                             .show();
                                     confirmation[0] = "";
-                                    absentButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(Dashboard.this, R.color.teal_200)));
+                                    absentButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(Dashboard.this, R.color.absent_button_color)));
                                     remarkEditText.setText("");
                                 }
                             });
                 } else if (confirmation[0] == "present") {
                     UserApi userApi = UserApi.getInstance();
                     String userId = userApi.getUserId();
+                    String username = userApi.getUsername();
                     Confirmation currentConfirmation = new Confirmation();
                     currentConfirmation.setConfirmation("present");
+                    currentConfirmation.setUsername(username);
                     currentConfirmation.setUserId(userId);
                     currentConfirmation.setPracticeDate(practiceDate);
                     currentConfirmation.setRemarkOrReason(remarkEditText.getText().toString().trim());
-                    collectionReference.document(userId+"_confirmation")
+                    SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("dd_MM_yyyy");
+                    String date = simpleDateFormat1.format(finalTomorrow);
+                    String docAddress = userId+"_"+date;
+                    Log.d("docAddress", "onClick: " + docAddress);
+                    collectionReference.document(docAddress)
                             .set(currentConfirmation)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
@@ -205,7 +280,7 @@ public class Dashboard extends AppCompatActivity {
                                     Toast.makeText(Dashboard.this, "Thankyou for confirming your presence", Toast.LENGTH_SHORT)
                                             .show();
                                     confirmation[0] = "";
-                                    presentButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(Dashboard.this, R.color.teal_200)));
+                                    presentButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(Dashboard.this, R.color.present_button_color)));
                                     remarkEditText.setText("");
                                 }
                             })
@@ -215,7 +290,7 @@ public class Dashboard extends AppCompatActivity {
                                     Toast.makeText(Dashboard.this, "Couldn't update attendance", Toast.LENGTH_SHORT)
                                             .show();
                                     confirmation[0] = "";
-                                    presentButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(Dashboard.this, R.color.teal_200)));
+                                    presentButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(Dashboard.this, R.color.present_button_color)));
                                     remarkEditText.setText("");
                                 }
                             });
@@ -240,6 +315,13 @@ public class Dashboard extends AppCompatActivity {
                 }
                 if (item.getItemId() == R.id.attendance_button) {
                     Intent intent = new Intent(Dashboard.this, BatchmateAttendance.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                }
+                if (item.getItemId() == R.id.manage_practice_confirmation_button) {
+                    Intent intent = new Intent(Dashboard.this, ManagePracticeConfirmationActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     finish();
@@ -281,5 +363,34 @@ public class Dashboard extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuth.addAuthStateListener(authStateListener);
         currentUser = firebaseAuth.getCurrentUser();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("dashboard_act", "onResume: called");
+        final String[] imageUrl = {""};
+        profileCollectionReference.whereEqualTo("userId", UserApi.getInstance().getUserId())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        if (!queryDocumentSnapshots.isEmpty()){
+                            for (QueryDocumentSnapshot snapshot: queryDocumentSnapshots) {
+                                imageUrl[0] = snapshot.getString("imagePath");
+                                if (!Objects.equals(imageUrl[0], "")) {
+                                    Picasso.get().load(imageUrl[0]).into(profilePicture);
+                                }
+                            }
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
     }
 }

@@ -6,8 +6,12 @@
         android:icon="@drawable/ic_baseline_home_24"/>
     <item
         android:id="@+id/attendance_button"
-        android:title="Batchmates' attendance"
+        android:title="Attendance"
         android:icon="@drawable/ic_baseline_group_24"/>
+    <item
+        android:id="@+id/manage_practice_confirmation_button"
+        android:title="Confirmations"
+        android:icon="@drawable/ic_baseline_rule_folder_24"/>
     <item
         android:id="@+id/council_button"
         android:title="Council"

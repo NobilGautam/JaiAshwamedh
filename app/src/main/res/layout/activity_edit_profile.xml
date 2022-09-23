@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditProfileActivity"
+    android:background="@color/dark_background">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="152dp"
+        android:alpha="0.3"
+        android:background="@drawable/ashwamedhwithouttext"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="18dp"
+        android:fontFamily="@font/oswald"
+        android:text="PROFILE"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ScrollView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/textView"
+            android:gravity="center">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/profile_img_cardview"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:elevation="12dp"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="50dp">
+
+                <ImageView
+                    android:id="@+id/profile_picture_imageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_photo_placeholder" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit profile picture"
+                android:id="@+id/edit_profile_picture_button"
+                android:textColor="@color/white"
+                android:layout_marginTop="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NAME: "
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/oswald"
+                    android:layout_marginStart="50dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nobil Gautam"
+                    android:id="@+id/name_textView_profile"
+                    android:layout_marginStart="20dp"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/oswald"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="EMAIL: "
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/oswald"
+                    android:layout_marginStart="50dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="nobil.gautam.ug21@nsut.ac.in"
+                    android:layout_marginStart="20dp"
+                    android:id="@+id/email_textView_profile"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/oswald"/>
+            </LinearLayout>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="change password"
+                android:backgroundTint="#686767"
+                android:id="@+id/change_password_button"
+                android:layout_marginTop="30dp"/>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/change_password_cardView"
+                app:cardCornerRadius="30dp"
+                app:cardUseCompatPadding="true"
+                android:layout_margin="20dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center_horizontal">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="New password: "
+                            android:fontFamily="@font/oswald"
+                            android:layout_marginStart="40dp"
+                            android:textSize="18dp"/>
+
+                        <EditText
+                            android:id="@+id/new_password_editText"
+                            android:layout_width="150dp"
+                            android:layout_marginStart="25dp"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPassword"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="5dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Confirm password: "
+                            android:fontFamily="@font/oswald"
+                            android:layout_marginStart="40dp"
+                            android:textSize="18dp"/>
+
+                        <EditText
+                            android:id="@+id/confirm_password_editText"
+                            android:layout_width="150dp"
+                            android:layout_marginStart="10dp"
+                            android:inputType="textPassword"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                    <Button
+                        android:id="@+id/update_password_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="update password"
+                        android:layout_marginTop="20dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#686767"
+                android:id="@+id/save_changes_button"
+                android:text="Save changes"/>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu"
+        android:background="#2B2A2A"
+        app:itemIconTint="@drawable/selector"
+        app:itemTextColor="@drawable/selector"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

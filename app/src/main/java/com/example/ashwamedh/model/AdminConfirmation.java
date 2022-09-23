@@ -1,25 +1,13 @@
 package com.example.ashwamedh.model;
 
-public class Confirmation {
+public class AdminConfirmation {
     private String userId;
     private String practiceDate;
     private String confirmation;
     private String remarkOrReason;
     private String username;
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public Confirmation() {
-
-    }
-
-    public Confirmation(String userId, String practiceDate, String confirmation, String remarkOrReason, String username) {
+    public AdminConfirmation(String userId, String practiceDate, String confirmation, String remarkOrReason, String username) {
         this.userId = userId;
         this.practiceDate = practiceDate;
         this.confirmation = confirmation;
@@ -27,12 +15,8 @@ public class Confirmation {
         this.username = username;
     }
 
-    public String getRemarkOrReason() {
-        return remarkOrReason;
-    }
+    public AdminConfirmation() {
 
-    public void setRemarkOrReason(String remarkOrReason) {
-        this.remarkOrReason = remarkOrReason;
     }
 
     public String getUserId() {
@@ -57,5 +41,21 @@ public class Confirmation {
 
     public void setConfirmation(String confirmation) {
         this.confirmation = confirmation;
+    }
+
+    public String getRemarkOrReason() {
+        return remarkOrReason;
+    }
+
+    public void setRemarkOrReason(String remarkOrReason) {
+        this.remarkOrReason = remarkOrReason;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

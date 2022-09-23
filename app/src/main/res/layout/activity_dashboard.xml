@@ -7,6 +7,8 @@
     tools:context=".Dashboard"
     android:background="#3C3B3B">
 
+
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
@@ -18,15 +20,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
-    <ImageView
-        android:id="@+id/userImageView"
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/profile_img_cardview_dashboard"
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:elevation="12dp"
         android:layout_marginTop="16dp"
+        app:cardCornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/ic_baseline_account_circle_24" />
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <ImageView
+            android:id="@+id/userImageView"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/profile_photo_placeholder" />
+    </androidx.cardview.widget.CardView>
 
     <ImageButton
         android:id="@+id/signOut_dashboard"
@@ -39,6 +52,22 @@
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_exit_to_app_24" />
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="60dp"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.580"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/profile_img_cardview_dashboard">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/ic_baseline_edit_24"/>
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/textView"
@@ -55,6 +84,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
+
+
+    <TextView
+        android:id="@+id/greeting_name_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="18dp"
+        android:fontFamily="@font/oswald"
+        android:text="NOBIL GAUTAM"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/cardView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_img_cardview_dashboard"
+        app:layout_constraintVertical_bias="0.052" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
@@ -79,11 +126,12 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="238dp"
-                android:layout_height="55dp"
+                android:id="@+id/practice_intimation_textview"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="15dp"
-                android:text="Add your confirmation for the next practice"
+                android:text="Add your confirmation for the next practice at 01/03/2022, Monday"
                 android:textAlignment="center"
                 android:textSize="18dp"
                 android:textStyle="bold" />
@@ -176,7 +224,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userImageView">
+        app:layout_constraintTop_toBottomOf="@+id/profile_img_cardview_dashboard">
 
         <LinearLayout
             android:layout_width="wrap_content"

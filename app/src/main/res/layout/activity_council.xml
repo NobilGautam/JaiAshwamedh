@@ -148,6 +148,359 @@
                         android:scaleType="centerCrop"/>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
+
+            <TextView
+                android:text="HON'BLE DIRECTORS"
+                style="@style/heading_text_style"
+                android:textSize="18dp"
+                android:layout_marginTop="30dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="10dp">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:elevation="12dp"
+                    android:id="@+id/director_shameek"
+                    app:cardCornerRadius="50dp"
+                    android:layout_marginEnd="20dp">
+                    <ImageView
+                        android:layout_height="100dp"
+                        android:layout_width="match_parent"
+                        android:src="@drawable/director1"
+                        android:scaleType="centerCrop"/>
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:elevation="12dp"
+                    android:id="@+id/director_heemangi"
+                    app:cardCornerRadius="50dp"
+                    android:layout_marginEnd="20dp">
+                    <ImageView
+                        android:layout_height="100dp"
+                        android:layout_width="match_parent"
+                        android:src="@drawable/ashwa_greybg"
+                        android:scaleType="centerCrop"/>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <TextView
+                android:text="DEPARTMENT HEADS"
+                style="@style/heading_text_style"
+                android:textSize="18dp"
+                android:layout_marginTop="30dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="10dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:layout_marginEnd="20dp">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:elevation="12dp"
+                        android:id="@+id/hod_filmmaking"
+                        app:cardCornerRadius="50dp">
+                        <ImageView
+                            android:layout_height="100dp"
+                            android:layout_width="match_parent"
+                            android:src="@drawable/vice_presi_udit"
+                            android:scaleType="centerCrop"/>
+
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="12dp"
+                        android:text="HOD Filmmaking"
+                        android:fontFamily="@font/roboto_bold"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:layout_marginEnd="20dp">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:elevation="12dp"
+                        android:id="@+id/hod_media"
+                        app:cardCornerRadius="50dp">
+                        <ImageView
+                            android:layout_height="100dp"
+                            android:layout_width="match_parent"
+                            android:src="@drawable/president2"
+                            android:scaleType="centerCrop"/>
+
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="12dp"
+                        android:text="HOD Media"
+                        android:fontFamily="@font/roboto_bold"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:elevation="12dp"
+                        android:id="@+id/hod_acting"
+                        app:cardCornerRadius="50dp">
+                        <ImageView
+                            android:layout_height="100dp"
+                            android:layout_width="match_parent"
+                            android:src="@drawable/vice_presi_ramon"
+                            android:scaleType="centerCrop"/>
+
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="12dp"
+                        android:text="HOD Acting"
+                        android:fontFamily="@font/roboto_bold"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="10dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:layout_marginEnd="20dp">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:elevation="12dp"
+                        android:id="@+id/hod_sponsor1"
+                        app:cardCornerRadius="50dp">
+                        <ImageView
+                            android:layout_height="100dp"
+                            android:layout_width="match_parent"
+                            android:src="@drawable/vice_presi_gaba"
+                            android:scaleType="centerCrop"/>
+
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="12dp"
+                        android:text="HOD Sponsorship"
+                        android:fontFamily="@font/roboto_bold"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:layout_marginEnd="20dp">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:elevation="12dp"
+                        android:id="@+id/hod_sponsor2"
+                        app:cardCornerRadius="50dp">
+                        <ImageView
+                            android:layout_height="100dp"
+                            android:layout_width="match_parent"
+                            android:src="@drawable/head_sponsi"
+                            android:scaleType="centerCrop"/>
+
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="12dp"
+                        android:text="HOD Sponsorship"
+                        android:fontFamily="@font/roboto_bold"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:elevation="12dp"
+                        android:id="@+id/hod_music"
+                        app:cardCornerRadius="50dp">
+                        <ImageView
+                            android:layout_height="100dp"
+                            android:layout_width="match_parent"
+                            android:src="@drawable/head_music"
+                            android:scaleType="centerCrop"/>
+
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="12dp"
+                        android:text="HOD Music"
+                        android:fontFamily="@font/roboto_bold"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="10dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:layout_marginEnd="20dp">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:elevation="12dp"
+                        android:id="@+id/hod_logistics"
+                        app:cardCornerRadius="50dp">
+                        <ImageView
+                            android:layout_height="100dp"
+                            android:layout_width="match_parent"
+                            android:src="@drawable/ashwa_greybg"
+                            android:scaleType="centerCrop"/>
+
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="12dp"
+                        android:text="HOD Logistics"
+                        android:fontFamily="@font/roboto_bold"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:layout_marginEnd="20dp">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:elevation="12dp"
+                        android:id="@+id/hod_script"
+                        app:cardCornerRadius="50dp">
+                        <ImageView
+                            android:layout_height="100dp"
+                            android:layout_width="match_parent"
+                            android:src="@drawable/director1"
+                            android:scaleType="centerCrop"/>
+
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="12dp"
+                        android:text="HOD Script"
+                        android:fontFamily="@font/roboto_bold"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:elevation="12dp"
+                        android:id="@+id/hod_pr"
+                        app:cardCornerRadius="50dp">
+                        <ImageView
+                            android:layout_height="100dp"
+                            android:layout_width="match_parent"
+                            android:src="@drawable/ashwa_greybg"
+                            android:scaleType="centerCrop"/>
+
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="12dp"
+                        android:text="HOD Public Relations"
+                        android:fontFamily="@font/roboto_bold"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="10dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:elevation="12dp"
+                        android:id="@+id/hod_management"
+                        app:cardCornerRadius="50dp">
+                        <ImageView
+                            android:layout_height="100dp"
+                            android:layout_width="match_parent"
+                            android:src="@drawable/head_management"
+                            android:scaleType="centerCrop"/>
+
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="12dp"
+                        android:text="HOD Management"
+                        android:fontFamily="@font/roboto_bold"/>
+            </LinearLayout>
+
+        </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

@@ -91,7 +91,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/present_button_color"
                     android:clickable="true"
                     android:layout_marginBottom="8dp"
                     app:srcCompat="@drawable/ic_baseline_check_24" />
@@ -103,7 +102,6 @@
                     android:layout_marginStart="20dp"
                     android:layout_weight="1"
                     android:clickable="true"
-                    android:backgroundTint="@color/absent_button_color"
                     android:layout_marginBottom="8dp"
                     app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
             </LinearLayout>

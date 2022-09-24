@@ -10,6 +10,35 @@
     android:layout_marginTop="10dp"
     app:cardElevation="16dp">
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="92dp"
+        android:layout_height="92dp"
+        app:cardCornerRadius="90dp"
+        android:alpha="0.4"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/image_gradient">
+        <ImageView
+            android:id="@+id/profile_img_holder_AR"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/ashwa_greybg"
+            android:src="@drawable/image_gradient"/>
+    </androidx.cardview.widget.CardView>
+    <TextView
+        android:id="@+id/attendance_row_name_top"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:elevation="2dp"
+        android:fontFamily="@font/oswald"
+        android:text="Shatakshi Chaturvedi"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -54,6 +83,9 @@
             android:indeterminate="false"
             android:padding="5dp"
             android:progressDrawable="@drawable/circle_progress_bar" />
+
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+
 
 </androidx.cardview.widget.CardView>

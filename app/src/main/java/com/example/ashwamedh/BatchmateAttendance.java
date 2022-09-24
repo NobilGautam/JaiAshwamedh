@@ -87,7 +87,8 @@ public class BatchmateAttendance extends AppCompatActivity implements OnAttendan
                                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                             @Override
                                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                if (task.isSuccessful()) {
+                                                if (task.isSuccessful() &&
+                                                        !Objects.equals(snapshot.getString("username"), "ADMIN")) {
                                                     for (QueryDocumentSnapshot confirmation : task.getResult()) {
                                                         if (Objects.equals(confirmation.getString("confirmation"), "present")) {
                                                             daysPresent[0]++;

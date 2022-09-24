@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -13,13 +14,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ashwamedh.R;
 import com.example.ashwamedh.model.Attendance;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.Objects;
 
 public class AllAttendanceRecyclerViewAdapter extends RecyclerView.Adapter<AllAttendanceRecyclerViewAdapter.ViewHolder> {
     private OnAttendanceClickListener onAttendanceClickListener;
     private List<Attendance> attendanceList;
     private Context context;
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference profilePictureCollection = db.collection("Profile Pictures");
 
     public AllAttendanceRecyclerViewAdapter(List<Attendance> attendanceList, Context context, OnAttendanceClickListener onAttendanceClickListener) {
         this.attendanceList = attendanceList;
@@ -40,11 +50,13 @@ public class AllAttendanceRecyclerViewAdapter extends RecyclerView.Adapter<AllAt
     public void onBindViewHolder(@NonNull AllAttendanceRecyclerViewAdapter.ViewHolder holder, int position) {
         Attendance attendance = attendanceList.get(position);
         holder.nameTextView.setText(attendance.getUsername());
+        holder.nameTextViewTop.setText(attendance.getUsername());
         int daysPresent = attendance.getDaysPresent();
         int totalDays = attendance.getTotalDays();
         int percentage = (daysPresent*100)/totalDays;
         holder.percentageTextView.setText(percentage+"%");
         holder.progressBar.setProgress(percentage);
+
     }
 
     @Override
@@ -55,7 +67,9 @@ public class AllAttendanceRecyclerViewAdapter extends RecyclerView.Adapter<AllAt
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private ProgressBar progressBar;
         private TextView nameTextView;
+        private TextView nameTextViewTop;
         private TextView percentageTextView;
+        private ImageView profilePicture;
 
         OnAttendanceClickListener onAttendanceClickListener;
 
@@ -67,8 +81,9 @@ public class AllAttendanceRecyclerViewAdapter extends RecyclerView.Adapter<AllAt
             context = ctx;
             progressBar = itemView.findViewById(R.id.progressBar_attendance);
             nameTextView = itemView.findViewById(R.id.attendance_row_name);
+            nameTextViewTop = itemView.findViewById(R.id.attendance_row_name_top);
             percentageTextView = itemView.findViewById(R.id.attendance_row_percentage);
-
+            profilePicture = itemView.findViewById(R.id.profile_img_holder_AR);
             itemView.setOnClickListener(this);
         }
 

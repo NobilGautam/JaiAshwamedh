@@ -22,20 +22,28 @@ import com.example.ashwamedh.adapter.ManageAttendanceRecyclerViewAdapter;
 import com.example.ashwamedh.adapter.OnAttendanceClickListener;
 import com.example.ashwamedh.model.Confirmation;
 import com.example.ashwamedh.util.UserApi;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import org.checkerframework.checker.units.qual.C;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 public class ManagePracticeConfirmationActivity extends AppCompatActivity implements OnAttendanceClickListener {
@@ -61,6 +69,8 @@ public class ManagePracticeConfirmationActivity extends AppCompatActivity implem
     private CollectionReference collectionReference = db.collection("Confirmations");
     private CollectionReference userCollection = db.collection("Users");
 
+    private FirebaseAuth firebaseAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +78,7 @@ public class ManagePracticeConfirmationActivity extends AppCompatActivity implem
 
         Objects.requireNonNull(getSupportActionBar()).hide();
 
+        firebaseAuth = FirebaseAuth.getInstance();
         practiceList = new ArrayList<>();
 
         recyclerView = findViewById(R.id.manage_attendance_recycler_view);
@@ -78,6 +89,17 @@ public class ManagePracticeConfirmationActivity extends AppCompatActivity implem
         updateButton = findViewById(R.id.update_attendance_button);
         noPracticeTextView = findViewById(R.id.no_practice_textView);
         signOut = findViewById(R.id.signOut_manage_attendance);
+
+        signOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firebaseAuth.signOut();
+                Intent intent = new Intent(ManagePracticeConfirmationActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         absentFab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(ManagePracticeConfirmationActivity.this, R.color.absent_button_color)));
         presentFab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(ManagePracticeConfirmationActivity.this, R.color.present_button_color)));
@@ -99,8 +121,6 @@ public class ManagePracticeConfirmationActivity extends AppCompatActivity implem
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         practiceDate = simpleDateFormat.format(today);
 
-
-        Log.d(TAG, "onCreate: " + Calendar.DAY_OF_WEEK);
         if (Calendar.getInstance().get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY
         || Calendar.getInstance().get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
             recyclerView.setVisibility(View.INVISIBLE);
@@ -108,6 +128,55 @@ public class ManagePracticeConfirmationActivity extends AppCompatActivity implem
         } else {
             recyclerView.setVisibility(View.VISIBLE);
             noPracticeTextView.setVisibility(View.INVISIBLE);
+            userCollection
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot snapshot : task.getResult()) {
+                                    String userId = snapshot.getString("userId");
+                                    String username = snapshot.getString("username");
+                                    SimpleDateFormat docAddressFormat = new SimpleDateFormat("dd_MM_yyyy");
+                                    String practiceDateDoc = docAddressFormat.format(today);
+                                    String docAddress = userId + "_" + practiceDateDoc;
+                                    collectionReference.document(docAddress)
+                                            .get()
+                                            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                    if (task.isSuccessful() &&
+                                                            !Objects.equals(snapshot.getString("username"), "ADMIN")) {
+                                                        DocumentSnapshot document = task.getResult();
+                                                        if (!document.exists()) {
+                                                            Confirmation confirmation = new Confirmation();
+                                                            confirmation.setUserId(userId);
+                                                            confirmation.setUsername(username);
+                                                            confirmation.setConfirmation("absent");
+                                                            confirmation.setPracticeDate(practiceDate);
+                                                            confirmation.setRemarkOrReason("Didn't add confirmation");
+
+                                                            collectionReference.document(docAddress).set(confirmation);
+                                                        }
+                                                    }
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+
+                                                }
+                                            });
+                                }
+                            }
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.d(TAG, "onFailure: couldn't fetch user collection");
+                        }
+                    });
         }
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -175,6 +244,7 @@ public class ManagePracticeConfirmationActivity extends AppCompatActivity implem
 
                     }
                 });
+
     }
 
     @Override

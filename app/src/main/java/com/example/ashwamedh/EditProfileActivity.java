@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,6 +61,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private EditText confirmPasswordEditText;
     private Button updatePasswordButton;
     private Button saveChangesButton;
+    private ProgressBar progressBar;
     private BottomNavigationView bottomNavigationView;
 
     private FirebaseAuth firebaseAuth;
@@ -70,6 +72,15 @@ public class EditProfileActivity extends AppCompatActivity {
     private CollectionReference collectionReference = db.collection("Profile Pictures");
 
     private Uri imageUri;
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(EditProfileActivity.this, Dashboard.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,9 +103,11 @@ public class EditProfileActivity extends AppCompatActivity {
         confirmPasswordEditText = findViewById(R.id.confirm_password_editText);
         updatePasswordButton = findViewById(R.id.update_password_button);
         saveChangesButton = findViewById(R.id.save_changes_button);
+        progressBar = findViewById(R.id.progressBar_edit_profile);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         changePasswordCardView.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
 
         bottomNavigationView.setSelectedItemId(R.id.home_button);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -252,6 +265,7 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: " + imageUri.toString());
+                progressBar.setVisibility(View.VISIBLE);
                 if (imageUri != null) {
                     Log.d(TAG, "onClick: inside save changes");
                     StorageReference filepath = storageReference
@@ -268,7 +282,7 @@ public class EditProfileActivity extends AppCompatActivity {
                                             .addOnSuccessListener(new OnSuccessListener<Uri>() {
                                                 @Override
                                                 public void onSuccess(Uri uri) {
-                                                    Log.d(TAG, "onSuccess: inside putfile method");
+                                                    Log.d(TAG, "onSuccess: inside put file method");
                                                     ProfilePicture profilePicture = new ProfilePicture();
                                                     profilePicture.setUserId(UserApi.getInstance().getUserId());
                                                     profilePicture.setImagePath(uri.toString());
@@ -280,6 +294,7 @@ public class EditProfileActivity extends AppCompatActivity {
                                                                     Toast.makeText(EditProfileActivity.this,
                                                                                     "Saved Successfully!", Toast.LENGTH_SHORT)
                                                                             .show();
+                                                                    progressBar.setVisibility(View.INVISIBLE);
                                                                     Intent intent = new Intent(EditProfileActivity.this, Dashboard.class);
                                                                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                                                     startActivity(intent);
@@ -290,6 +305,7 @@ public class EditProfileActivity extends AppCompatActivity {
                                                                 @Override
                                                                 public void onFailure(@NonNull Exception e) {
                                                                     Log.d(TAG, "onCollectionFailure: " + e.getMessage());
+                                                                    progressBar.setVisibility(View.INVISIBLE);
                                                                 }
                                                             });
                                                 }
@@ -298,6 +314,7 @@ public class EditProfileActivity extends AppCompatActivity {
                                                 @Override
                                                 public void onFailure(@NonNull Exception e) {
                                                     Log.d(TAG, "onFailure: get download url " + e.getMessage());
+                                                    progressBar.setVisibility(View.INVISIBLE);
                                                 }
                                             });
                                 }
@@ -306,6 +323,7 @@ public class EditProfileActivity extends AppCompatActivity {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
                                     Log.d(TAG, "onFailure: put file " + e.getMessage());
+                                    progressBar.setVisibility(View.INVISIBLE);
                                 }
                             });
                 }
@@ -327,6 +345,5 @@ public class EditProfileActivity extends AppCompatActivity {
                 profileImageView.setImageURI(imageUri);
             }
         }
-        Log.d(TAG, "onActivityResult: " + imageUri.toString());
     }
 }

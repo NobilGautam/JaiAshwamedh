@@ -113,15 +113,15 @@ public class WorksActivity extends AppCompatActivity {
             }
         });
 
-//        jingleCardView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(WorksActivity.this, JingleActivity.class);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
+        jingleCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(WorksActivity.this, JingleActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            }
+        });
 //
 //        creationCardView.setOnClickListener(new View.OnClickListener() {
 //            @Override

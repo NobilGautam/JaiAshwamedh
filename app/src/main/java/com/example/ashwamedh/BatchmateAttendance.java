@@ -52,6 +52,15 @@ public class BatchmateAttendance extends AppCompatActivity implements OnAttendan
     private ImageButton signOut;
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(BatchmateAttendance.this, Dashboard.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_batchmate_attendance);
@@ -155,6 +164,13 @@ public class BatchmateAttendance extends AppCompatActivity implements OnAttendan
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.home_button) {
                     Intent intent = new Intent(BatchmateAttendance.this, Dashboard.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                }
+                if (item.getItemId() == R.id.works_button) {
+                    Intent intent = new Intent(BatchmateAttendance.this, WorksActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     finish();

@@ -43,16 +43,17 @@
         app:layout_constraintVertical_bias="0.0"
         style="@style/heading_text_style" />
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/all_attendance_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="645dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/batchAttendance_header_textView" />
-
-
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"

@@ -13,11 +13,11 @@
         android:title="Confirmations"
         android:icon="@drawable/ic_baseline_rule_folder_24"/>
     <item
+        android:id="@+id/works_button"
+        android:title="Works"
+        android:icon="@drawable/ic_baseline_work_24"/>
+    <item
         android:id="@+id/council_button"
         android:title="Council"
         android:icon="@drawable/ic_baseline_council_24"/>
-<!--    <item-->
-<!--        android:id="@+id/script_button"-->
-<!--        android:title="Scripts"-->
-<!--        android:icon="@drawable/ic_baseline_script_24"/>-->
 </menu>

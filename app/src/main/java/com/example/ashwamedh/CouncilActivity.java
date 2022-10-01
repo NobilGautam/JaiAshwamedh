@@ -20,6 +20,15 @@ public class CouncilActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener authStateListener;
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(CouncilActivity.this, Dashboard.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_council);
@@ -64,6 +73,13 @@ public class CouncilActivity extends AppCompatActivity {
                 }
                 if (item.getItemId() == R.id.attendance_button) {
                     Intent intent = new Intent(CouncilActivity.this, BatchmateAttendance.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                }
+                if (item.getItemId() == R.id.works_button) {
+                    Intent intent = new Intent(CouncilActivity.this, WorksActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     finish();

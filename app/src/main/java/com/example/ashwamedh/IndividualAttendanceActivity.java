@@ -75,6 +75,13 @@ public class IndividualAttendanceActivity extends AppCompatActivity {
                     finish();
                     return true;
                 }
+                if (item.getItemId() == R.id.works_button) {
+                    Intent intent = new Intent(IndividualAttendanceActivity.this, WorksActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                }
                 if (item.getItemId() == R.id.council_button) {
                     Intent intent = new Intent(IndividualAttendanceActivity.this, CouncilActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -1,5 +1,6 @@
 package com.example.ashwamedh.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -46,7 +47,7 @@ public class ManageAttendanceRecyclerViewAdapter extends RecyclerView.Adapter<Ma
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ManageAttendanceRecyclerViewAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ManageAttendanceRecyclerViewAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Confirmation confirmation = practiceList.get(position);
         holder.nameTextView.setText(confirmation.getUsername());
         if (confirmation.getRemarkOrReason() == "") {

@@ -72,6 +72,15 @@ public class ManagePracticeConfirmationActivity extends AppCompatActivity implem
     private FirebaseAuth firebaseAuth;
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(ManagePracticeConfirmationActivity.this, Dashboard.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_practice_confirmation);
@@ -204,6 +213,13 @@ public class ManagePracticeConfirmationActivity extends AppCompatActivity implem
                     return true;
                 }
                 if (item.getItemId() == R.id.manage_practice_confirmation_button) {
+                    return true;
+                }
+                if (item.getItemId() == R.id.works_button) {
+                    Intent intent = new Intent(ManagePracticeConfirmationActivity.this, WorksActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
                     return true;
                 }
                 return false;

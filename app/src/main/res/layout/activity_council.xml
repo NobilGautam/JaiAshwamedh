@@ -68,34 +68,57 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_horizontal">
-                <androidx.cardview.widget.CardView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:elevation="12dp"
-                    android:id="@+id/president_img"
-                    app:cardCornerRadius="50dp"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="10dp">
-                    <ImageView
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:layout_width="match_parent"
-                        android:src="@drawable/president"
-                        android:scaleType="centerCrop"/>
-                </androidx.cardview.widget.CardView>
+                        android:elevation="12dp"
+                        android:id="@+id/president_img"
+                        app:cardCornerRadius="50dp"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="10dp">
+                        <ImageView
+                            android:layout_height="100dp"
+                            android:layout_width="match_parent"
+                            android:src="@drawable/president"
+                            android:scaleType="centerCrop"/>
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/oswald"
+                        android:text="Aashutosh Kumar"/>
+                </LinearLayout>
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:elevation="12dp"
-                    android:id="@+id/president2_img"
-                    app:cardCornerRadius="50dp"
-                    android:layout_marginStart="10dp">
-                    <ImageView
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:layout_width="match_parent"
-                        android:src="@drawable/president2"
-                        android:scaleType="centerCrop"/>
-                </androidx.cardview.widget.CardView>
+                        android:elevation="12dp"
+                        android:id="@+id/president2_img"
+                        app:cardCornerRadius="50dp"
+                        android:layout_marginStart="10dp">
+                        <ImageView
+                            android:layout_height="100dp"
+                            android:layout_width="match_parent"
+                            android:src="@drawable/president2"
+                            android:scaleType="centerCrop"/>
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/oswald"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Aditya Karn"/>
+                </LinearLayout>
             </LinearLayout>
 
             <TextView
@@ -109,44 +132,82 @@
                 android:orientation="horizontal"
                 android:gravity="center_horizontal"
                 android:layout_marginTop="10dp">
-                <androidx.cardview.widget.CardView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:elevation="12dp"
-                    android:id="@+id/vice_presi_ramon_img"
-                    app:cardCornerRadius="50dp"
-                    android:layout_marginEnd="20dp">
-                    <ImageView
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:layout_width="match_parent"
-                        android:src="@drawable/vice_presi_ramon"
-                        android:scaleType="centerCrop"/>
-                </androidx.cardview.widget.CardView>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:elevation="12dp"
-                    android:id="@+id/vice_presi_gaba_img"
-                    app:cardCornerRadius="50dp"
-                    android:layout_marginEnd="20dp">
-                    <ImageView
+                        android:elevation="12dp"
+                        android:id="@+id/vice_presi_ramon_img"
+                        app:cardCornerRadius="50dp"
+                        android:layout_marginEnd="20dp">
+                        <ImageView
+                            android:layout_height="100dp"
+                            android:layout_width="match_parent"
+                            android:src="@drawable/vice_presi_ramon"
+                            android:scaleType="centerCrop"/>
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/oswald"
+                        android:text="Ramon Bathla"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginEnd="10dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:layout_width="match_parent"
-                        android:src="@drawable/vice_presi_gaba"
-                        android:scaleType="centerCrop"/>
-                </androidx.cardview.widget.CardView>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:elevation="12dp"
-                    android:id="@+id/vice_presi_udit_img"
-                    app:cardCornerRadius="50dp">
-                    <ImageView
+                        android:elevation="12dp"
+                        android:id="@+id/vice_presi_gaba_img"
+                        app:cardCornerRadius="50dp"
+                        android:layout_marginEnd="20dp">
+                        <ImageView
+                            android:layout_height="100dp"
+                            android:layout_width="match_parent"
+                            android:src="@drawable/vice_presi_gaba"
+                            android:scaleType="centerCrop"/>
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/oswald"
+                        android:text="Pranav Gaba"
+                        android:textColor="@color/white"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginEnd="10dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:layout_width="match_parent"
-                        android:src="@drawable/vice_presi_udit"
-                        android:scaleType="centerCrop"/>
-                </androidx.cardview.widget.CardView>
+                        android:elevation="12dp"
+                        android:id="@+id/vice_presi_udit_img"
+                        app:cardCornerRadius="50dp">
+                        <ImageView
+                            android:layout_height="100dp"
+                            android:layout_width="match_parent"
+                            android:src="@drawable/vice_presi_udit"
+                            android:scaleType="centerCrop"/>
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:text="Udit Verma"
+                        android:fontFamily="@font/oswald"
+                        android:layout_gravity="center_horizontal"/>
+                </LinearLayout>
             </LinearLayout>
 
             <TextView
@@ -161,32 +222,56 @@
                 android:orientation="horizontal"
                 android:gravity="center_horizontal"
                 android:layout_marginTop="10dp">
-                <androidx.cardview.widget.CardView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:elevation="12dp"
-                    android:id="@+id/director_shameek"
-                    app:cardCornerRadius="50dp"
-                    android:layout_marginEnd="20dp">
-                    <ImageView
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:layout_width="match_parent"
-                        android:src="@drawable/director1"
-                        android:scaleType="centerCrop"/>
-                </androidx.cardview.widget.CardView>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:elevation="12dp"
-                    android:id="@+id/director_heemangi"
-                    app:cardCornerRadius="50dp"
-                    android:layout_marginEnd="20dp">
-                    <ImageView
+                        android:elevation="12dp"
+                        android:id="@+id/director_shameek"
+                        app:cardCornerRadius="50dp"
+                        android:layout_marginEnd="20dp">
+                        <ImageView
+                            android:layout_height="100dp"
+                            android:layout_width="match_parent"
+                            android:src="@drawable/director1"
+                            android:scaleType="centerCrop"/>
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/oswald"
+                        android:text="Shameek Pathak"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginEnd="10dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:layout_width="match_parent"
-                        android:src="@drawable/ashwa_greybg"
-                        android:scaleType="centerCrop"/>
-                </androidx.cardview.widget.CardView>
+                        android:elevation="12dp"
+                        android:id="@+id/director_heemangi"
+                        app:cardCornerRadius="50dp"
+                        android:layout_marginEnd="20dp">
+                        <ImageView
+                            android:layout_height="100dp"
+                            android:layout_width="match_parent"
+                            android:src="@drawable/ashwa_greybg"
+                            android:scaleType="centerCrop"/>
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Heemangi Aggarwal"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/oswald"/>
+                </LinearLayout>
             </LinearLayout>
 
             <TextView
@@ -224,8 +309,9 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textSize="12dp"
-                        android:text="HOD Filmmaking"
-                        android:fontFamily="@font/roboto_bold"/>
+                        android:gravity="center_horizontal"
+                        android:text="HOD Filmmaking\n(UDIT VERMA)"
+                        android:fontFamily="@font/oswald"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -252,8 +338,9 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textSize="12dp"
-                        android:text="HOD Media"
-                        android:fontFamily="@font/roboto_bold"/>
+                        android:gravity="center_horizontal"
+                        android:text="HOD Media\n(ADITA KARN)"
+                        android:fontFamily="@font/oswald"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -278,9 +365,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
+                        android:gravity="center_horizontal"
                         android:textSize="12dp"
-                        android:text="HOD Acting"
-                        android:fontFamily="@font/roboto_bold"/>
+                        android:text="HOD Acting\n(RAMON BATHLA)"
+                        android:fontFamily="@font/oswald"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -315,8 +403,9 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textSize="12dp"
-                        android:text="HOD Sponsorship"
-                        android:fontFamily="@font/roboto_bold"/>
+                        android:gravity="center_horizontal"
+                        android:text="HOD Sponsorship\n(PRANAV GABA)"
+                        android:fontFamily="@font/oswald"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -343,8 +432,9 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textSize="12dp"
-                        android:text="HOD Sponsorship"
-                        android:fontFamily="@font/roboto_bold"/>
+                        android:gravity="center_horizontal"
+                        android:text="HOD Sponsorship\n(PRIYANSHI CHAUHAN)"
+                        android:fontFamily="@font/oswald"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -370,8 +460,9 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textSize="12dp"
-                        android:text="HOD Music"
-                        android:fontFamily="@font/roboto_bold"/>
+                        android:gravity="center_horizontal"
+                        android:text="HOD Music\n(AYUSH KOKANDE)"
+                        android:fontFamily="@font/oswald"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -406,8 +497,9 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textSize="12dp"
-                        android:text="HOD Logistics"
-                        android:fontFamily="@font/roboto_bold"/>
+                        android:gravity="center_horizontal"
+                        android:text="HOD Logistics\n(TISMEET SINGH)"
+                        android:fontFamily="@font/oswald"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -434,8 +526,9 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textSize="12dp"
-                        android:text="HOD Script"
-                        android:fontFamily="@font/roboto_bold"/>
+                        android:gravity="center_horizontal"
+                        android:text="HOD Script\n(SHAMEEK PATHAK)"
+                        android:fontFamily="@font/oswald"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -461,8 +554,9 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textSize="12dp"
-                        android:text="HOD Public Relations"
-                        android:fontFamily="@font/roboto_bold"/>
+                        android:gravity="center_horizontal"
+                        android:text="HOD Public Relations\n(HEEMANGI AGGARWAL)"
+                        android:fontFamily="@font/oswald"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -496,8 +590,9 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textSize="12dp"
-                        android:text="HOD Management"
-                        android:fontFamily="@font/roboto_bold"/>
+                        android:gravity="center_horizontal"
+                        android:text="HOD Management\n(MANSI AGGARWAL)"
+                        android:fontFamily="@font/oswald"/>
             </LinearLayout>
 
         </LinearLayout>
